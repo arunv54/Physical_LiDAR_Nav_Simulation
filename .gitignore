@@ -1,0 +1,34 @@
+# Python environments, caches, and build products
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local credentials and machine-specific files
+.env
+.env.*
+.DS_Store
+Thumbs.db
+
+# Generated simulation build artifacts
+simulation/build/
+simulation/dist/
+simulation/outputs/submission/
+simulation/outputs/*preview*.png
+simulation/outputs/*screenshot*.png
+simulation/outputs/**/*preview*.png
+simulation/outputs/**/*screenshot*.png
+
+# LaTeX temporary files
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.xdv
