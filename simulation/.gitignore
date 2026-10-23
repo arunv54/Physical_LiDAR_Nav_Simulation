@@ -1,0 +1,33 @@
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.pytest_cache/
+.DS_Store
+build/
+dist/
+tests/.artifacts/
+
+# Reproducible raw histories and duplicate submission packages.
+data/**/*.npz
+!data/navigation_threshold/trials/*.npz
+data/video_inputs/
+outputs/submission/
+outputs/*preview*.png
+outputs/*screenshot*.png
+outputs/**/*preview*.png
+outputs/**/*screenshot*.png
+
+# Staged LaTeX assets are copied from the canonical figures and videos.
+latex_report/figures/
+latex_report/simulalted_environments/
+latex_report/visual_report.html
+latex_report/main.pdf
+latex_report/*.aux
+latex_report/*.log
+latex_report/*.out
+latex_report/*.toc
+latex_report/*.synctex.gz
+latex_report/*.fls
+latex_report/*.fdb_latexmk
+latex_report/*.xdv

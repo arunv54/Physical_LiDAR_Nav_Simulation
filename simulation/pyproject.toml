@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "midterm-lidar"
+version = "0.1.0"
+description = "Physics based LiDAR simulation with independent visualization"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24"]
+
+[project.optional-dependencies]
+visualization = ["matplotlib>=3.7", "plotly>=5", "pillow>=10"]
+reports = ["matplotlib>=3.7", "pypdf", "pillow>=10", "python-docx"]
+
+[project.scripts]
+lidar-project = "lidar_project.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["lidar_project*"]
+
+[tool.setuptools.package-data]
+"lidar_project.visualization" = ["default_theme.json", "templates/*", "static/*"]

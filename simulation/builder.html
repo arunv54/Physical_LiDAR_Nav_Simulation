@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>LiDAR project · Deliverables</title>
+  <style>
+    :root { --ink:#192c3c; --muted:#586671; --paper:#fff; --back:#f5f6f6; --line:#dce1e4; --navy:#163d59; --soft:#edf3f6; --good:#275a43; --good-bg:#edf5ef; --warn:#79571d; --warn-bg:#fbf4e7; --bad:#943c32; --bad-bg:#fcf0ee; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--back); color:var(--ink); font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    button,input,select { font:inherit; }
+    button,a,select,input,summary { -webkit-tap-highlight-color:transparent; }
+    button,a,select,input { outline-offset:4px; }
+    :focus-visible { outline:3px solid #557f9b; }
+    button { cursor:pointer; }
+    button:disabled,select:disabled { cursor:default; opacity:.48; }
+    a { color:var(--navy); text-underline-offset:3px; }
+    a:hover { text-decoration-thickness:2px; }
+    [hidden] { display:none !important; }
+    .shell { max-width:1160px; margin:0 auto; padding:26px 36px 50px; }
+    .topline { display:flex; align-items:center; justify-content:space-between; gap:16px; border-bottom:1px solid var(--line); padding-bottom:18px; }
+    .brand { font-size:13px; letter-spacing:.07em; text-transform:uppercase; font-weight:650; }
+    .server-state { display:flex; align-items:center; gap:8px; color:var(--muted); font-size:12px; }
+    .dot { width:7px; height:7px; border-radius:50%; background:#98a3aa; }
+    .dot.ready { background:#387453; }
+    .dot.busy { background:#a27b34; }
+    .dot.error { background:var(--bad); }
+    header { padding:30px 0 24px; max-width:830px; }
+    .eyebrow { margin:0 0 7px; font-size:12px; font-weight:650; letter-spacing:.09em; text-transform:uppercase; color:var(--muted); }
+    h1 { margin:0; font:normal 37px/1.15 Georgia,"Times New Roman",serif; letter-spacing:-.025em; }
+    .intro { margin:13px 0 0; max-width:780px; color:var(--muted); line-height:1.65; }
+    h2 { margin:0; font-size:19px; font-weight:650; letter-spacing:-.015em; }
+    h3 { margin:0; font-size:15px; font-weight:650; }
+    p { margin:0; }
+    .panel { background:var(--paper); border:1px solid var(--line); border-radius:9px; }
+    .build-grid { display:grid; grid-template-columns:minmax(0,1.4fr) minmax(0,1fr); gap:18px; align-items:stretch; }
+    .build { padding:23px; }
+    .section-note { color:var(--muted); font-size:13px; margin-top:5px; }
+    .recompute { display:flex; gap:10px; align-items:flex-start; margin:21px 0; }
+    .recompute input { accent-color:var(--navy); width:17px; height:17px; margin:3px 0 0; flex-shrink:0; }
+    .recompute label { font-size:14px; }
+    .recompute small { display:block; color:var(--muted); font-size:12px; margin-top:3px; }
+    .actions { display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
+    .button { min-height:39px; border:1px solid #bac7d0; border-radius:5px; padding:8px 14px; background:white; color:var(--navy); font-size:13px; font-weight:600; white-space:nowrap; }
+    .button:hover:not(:disabled) { background:var(--soft); }
+    .button.primary { background:var(--navy); border-color:var(--navy); color:#fff; }
+    .button.primary:hover:not(:disabled) { background:#0f2d43; }
+    .selection { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:8px; margin-top:14px; }
+    select { border:1px solid #bac7d0; border-radius:5px; padding:8px 30px 8px 10px; min-width:0; width:100%; color:var(--ink); background:#fff; font-size:13px; }
+    .small-label { display:block; margin-top:21px; font-size:12px; font-weight:600; }
+    .help-link { font-size:12px; margin-top:17px; display:inline-block; }
+    .progress-panel { padding:23px; display:flex; flex-direction:column; min-height:290px; }
+    .progress-heading { display:flex; justify-content:space-between; align-items:center; gap:12px; }
+    .refresh { border:0; padding:2px; background:none; font-size:12px; color:var(--muted); text-decoration:underline; text-underline-offset:3px; }
+    .job-status { margin:21px 0 8px; font-size:15px; font-weight:600; }
+    .job-message { color:var(--muted); font-size:13px; }
+    progress { appearance:none; width:100%; height:6px; border:0; margin:18px 0 4px; border-radius:10px; overflow:hidden; background:var(--soft); }
+    progress::-webkit-progress-bar { background:var(--soft); }
+    progress::-webkit-progress-value { background:var(--navy); }
+    progress::-moz-progress-bar { background:var(--navy); }
+    .log-details { border-top:1px solid var(--line); padding-top:12px; margin-top:auto; }
+    summary { cursor:pointer; }
+    .log-details summary { font-size:12px; color:var(--muted); padding:6px 0; }
+    .log { margin:8px 0 0; padding:11px; border-radius:4px; background:#f5f7f8; max-height:260px; overflow:auto; font:11px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace; white-space:pre-wrap; overflow-wrap:anywhere; }
+    .notice { padding:18px 21px; margin-bottom:18px; border:1px solid var(--line); border-left:3px solid var(--navy); border-radius:5px; background:var(--paper); }
+    .notice p + p { margin-top:6px; }
+    .notice code { background:var(--soft); padding:2px 6px; border-radius:3px; font-size:13px; }
+    .notice.error { border-color:#e5c8c2; border-left-color:var(--bad); background:var(--bad-bg); color:#73352c; }
+    .notice h2 { font-size:16px; margin-bottom:7px; }
+    .notice p { font-size:13px; }
+    .section { margin-top:31px; }
+    .section-head { display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:12px; margin-bottom:14px; }
+    .section-head p { font-size:12px; color:var(--muted); }
+    .outputs { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .output { display:flex; flex-direction:column; padding:17px 18px; min-height:125px; }
+    .output-type { font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:8px; }
+    .output-title { font-size:14px; font-weight:600; line-height:1.4; overflow-wrap:anywhere; }
+    .output-links { display:flex; gap:16px; margin-top:auto; padding-top:17px; font-size:12px; }
+    .empty { grid-column:1/-1; padding:23px; font-size:13px; color:var(--muted); }
+    .other-outputs { margin-top:15px; padding:0 18px; }
+    .other-outputs > summary { font-size:13px; padding:14px 0; }
+    .file-list { margin:0; padding:0 0 13px; list-style:none; }
+    .file-list li { display:flex; gap:15px; justify-content:space-between; align-items:baseline; border-top:1px solid #edf0f1; padding:10px 0; font-size:12px; }
+    .file-label { min-width:0; overflow-wrap:anywhere; }
+    .file-links { display:flex; flex-shrink:0; gap:14px; }
+    .workflow { overflow:hidden; }
+    .workflow-group + .workflow-group { border-top:1px solid var(--line); }
+    .workflow-group > summary { display:flex; align-items:center; gap:10px; padding:16px 20px; background:#fafbfb; font-size:14px; font-weight:650; list-style:none; }
+    .workflow-group > summary::before { content:"›"; display:inline-block; color:var(--muted); font-size:19px; line-height:14px; transition:transform .15s; }
+    .workflow-group[open] > summary::before { transform:rotate(90deg); }
+    .workflow-group > summary::-webkit-details-marker { display:none; }
+    .task { display:grid; grid-template-columns:28px minmax(0,1fr) auto auto; gap:14px; align-items:center; padding:15px 20px; border-top:1px solid #edf0f1; }
+    .task-number { color:#7a8790; font-size:12px; }
+    .task-description { color:var(--muted); font-size:12px; margin-top:3px; }
+    .task .button { min-height:32px; font-size:12px; padding:5px 11px; }
+    .badge { display:inline-flex; align-items:center; white-space:nowrap; padding:3px 8px; border-radius:4px; font-size:11px; font-weight:500; color:var(--muted); background:#f0f2f3; }
+    .badge.ready { background:var(--good-bg); color:var(--good); }
+    .badge.missing,.badge.stale { background:var(--warn-bg); color:var(--warn); }
+    .badge.running { background:var(--soft); color:var(--navy); }
+    .badge.failed { background:var(--bad-bg); color:var(--bad); }
+    footer { margin-top:29px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:12px; }
+    footer p + p { margin-top:5px; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    @media(max-width:800px) { .shell { padding:20px 22px 35px; } .build-grid { grid-template-columns:1fr; } .progress-panel { min-height:220px; } .outputs { grid-template-columns:repeat(2,minmax(0,1fr)); } .log-details { margin-top:18px; } h1 { font-size:33px; } }
+    @media(max-width:520px) { .shell { padding:18px 16px 30px; } .topline { align-items:flex-start; } .brand { font-size:11px; } .server-state { font-size:11px; } header { padding-top:24px; } h1 { font-size:30px; } .intro { font-size:14px; } .build,.progress-panel { padding:19px; } .selection { grid-template-columns:1fr; } .outputs { grid-template-columns:1fr; } .output { min-height:115px; } .task { grid-template-columns:20px minmax(0,1fr) auto; gap:9px; padding:14px 15px; } .task .badge { grid-column:2; justify-self:start; } .task .button { grid-row:1/3; grid-column:3; } .file-list li { flex-direction:column; gap:7px; } }
+    @media(prefers-reduced-motion:reduce) { * { transition:none !important; } }
+    @media print { body { background:#fff; } .shell { padding:0; } button,.build-grid,.server-state,.other-outputs { display:none; } .outputs { grid-template-columns:repeat(2,minmax(0,1fr)); } .panel { break-inside:avoid; } }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="topline">
+      <div class="brand">Robot perception · Midterm project</div>
+      <div class="server-state"><span id="server-dot" class="dot" aria-hidden="true"></span><span id="server-state">Connecting to local project</span></div>
+    </div>
+    <header>
+      <p class="eyebrow">Physics-based 3D LiDAR simulation</p>
+      <h1>Build the project deliverables</h1>
+      <p class="intro">Generate the report, figures, interactive views, and recorded simulations in one place. The same saved measurements support every presentation of the results.</p>
+    </header>
+
+    <div id="file-notice" class="notice" hidden>
+      <h2>Start the local project builder</h2>
+      <p>This HTML page needs the project’s local Python server to generate files.</p>
+      <p>Open a terminal in this code folder, run <code>python start.py</code>, and open the local address it displays. Setup instructions are in <a href="README.md">README.md</a>.</p>
+    </div>
+    <div id="error-notice" class="notice error" role="alert" hidden></div>
+
+    <main>
+      <div class="build-grid">
+        <section class="panel build" aria-labelledby="generate-heading">
+          <h2 id="generate-heading">Generate files</h2>
+          <p class="section-note">Start with all deliverables, or choose a single step below.</p>
+          <div class="recompute">
+            <input id="fresh" type="checkbox" disabled>
+            <label for="fresh">Recompute numerical studies<small>Leave unchecked to reuse verified saved results. Recomputing the full evaluation takes longer.</small></label>
+          </div>
+          <div class="actions">
+            <button id="generate-all" class="button primary" type="button" disabled>Generate all deliverables</button>
+            <button id="generate-package" class="button" type="button" disabled>Create hand-in package</button>
+          </div>
+          <label class="small-label" for="task-select">Or generate one step and its required inputs</label>
+          <div class="selection">
+            <select id="task-select" disabled><option value="">Select a step</option></select>
+            <button id="generate-selected" class="button" type="button" disabled>Generate selection</button>
+          </div>
+          <a class="help-link" href="README.md">Read the setup and running guide</a>
+        </section>
+        <section class="panel progress-panel" aria-labelledby="progress-heading">
+          <div class="progress-heading">
+            <h2 id="progress-heading">Build progress</h2>
+            <button id="refresh" class="refresh" type="button" disabled>Refresh</button>
+          </div>
+          <div id="progress-announcement" role="status" aria-live="polite" aria-atomic="true">
+            <p id="job-status" class="job-status">Waiting for the local server</p>
+            <p id="job-message" class="job-message">Available files and build steps will appear here.</p>
+          </div>
+          <progress id="job-progress" aria-label="Build completion" max="100" hidden></progress>
+          <details id="log-details" class="log-details">
+            <summary>View build log</summary>
+            <pre id="job-log" class="log" tabindex="0">No build has started.</pre>
+          </details>
+        </section>
+      </div>
+
+      <section class="section" aria-labelledby="deliverables-heading">
+        <div class="section-head">
+          <h2 id="deliverables-heading">Reports, viewers, and hand-in package</h2>
+          <p>Open a file to review it, or download a copy.</p>
+        </div>
+        <div id="main-outputs" class="outputs"><p class="panel empty">Connecting to the project’s saved deliverables…</p></div>
+        <details id="other-outputs" class="panel other-outputs" hidden>
+          <summary id="other-summary">Figures, animations, and supporting files</summary>
+          <ul id="other-files" class="file-list"></ul>
+        </details>
+      </section>
+
+      <section class="section" aria-labelledby="workflow-heading">
+        <div class="section-head">
+          <h2 id="workflow-heading">Project workflow</h2>
+          <p>Numerical simulation, visualization, and report writing remain separate.</p>
+        </div>
+        <div id="workflow" class="panel workflow"><p class="empty">The local builder will check the required inputs and outputs.</p></div>
+      </section>
+    </main>
+    <footer>
+      <p>Generated files stay in this project folder. Interactive views can be opened independently after they are created.</p>
+      <p>These evaluations test the simulation model and its navigation behavior. Physical sensor calibration remains outside the current project.</p>
+    </footer>
+  </div>
+
+  <script>
+  (() => {
+    'use strict';
+    const $ = id => document.getElementById(id);
+    const fileMode = location.protocol === 'file:';
+    if(!fileMode) document.querySelectorAll('a[href="README.md"]').forEach(link => {link.href='/guide';});
+    let connected = false;
+    let busy = false;
+    let pendingRequest = false;
+    let lastStatus = null;
+    let pollTimer = null;
+    let fetching = false;
+    let latestJob = null;
+    const groupOrder = ['data', 'media', 'report'];
+    const groupNames = {data:'1. Numerical studies',media:'2. Figures, animation, and interactive views',report:'3. Written report'};
+    const groupAliases = {numerical:'data',simulation:'data',experiment:'data',experiments:'data',analysis:'data',visualization:'media',render:'media',figure:'media',reports:'report',package:'report'};
+    const statusLabels = {ready:'Ready',complete:'Ready',completed:'Ready',missing:'Not generated',stale:'Update needed',running:'Running',failed:'Failed',error:'Failed',pending:'Waiting',queued:'Waiting',unavailable:'Unavailable'};
+    const make = (tag, className, value) => { const el=document.createElement(tag); if(className)el.className=className; if(value!==undefined)el.textContent=String(value); return el; };
+    const runningJob = job => !!job && (job.running === true || ['running','queued','starting'].includes(String(job.state || job.status || '').toLowerCase()));
+    function setServer(text, state='') { $('server-state').textContent=text; $('server-dot').className='dot '+state; }
+    function errorText(error) { return error && error.message ? error.message : String(error); }
+    function showError(message) { $('error-notice').textContent=message; $('error-notice').hidden=false; }
+    function clearError() { $('error-notice').hidden=true; $('error-notice').textContent=''; }
+    function canRun() { return connected && !busy && !pendingRequest && !fileMode; }
+    function updateControls() {
+      $('generate-all').disabled=!canRun(); $('generate-package').disabled=!canRun(); $('fresh').disabled=!canRun();
+      $('task-select').disabled=!canRun(); $('generate-selected').disabled=!canRun() || !$('task-select').value;
+      $('refresh').disabled=fileMode || fetching;
+      document.querySelectorAll('[data-run-task]').forEach(button => { button.disabled=!canRun(); });
+    }
+    function safeURL(value) {
+      if(!value || typeof value!=='string') return null;
+      try { const url=new URL(value,location.href); return url.origin===location.origin && ['http:','https:'].includes(url.protocol) ? url.href : null; } catch { return null; }
+    }
+    async function api(path, options={}) {
+      const response=await fetch(path,{cache:'no-store',...options});
+      let body; try {body=await response.json();} catch {throw new Error('The local server returned an unreadable response. Restart the project builder and try again.');}
+      if(!response.ok) throw new Error(body.error || body.message || 'The request could not be completed.');
+      return body;
+    }
+    function outputKind(output) {
+      const path=String(output.path || output.url || '').split('?')[0].toLowerCase();
+      if(path.endsWith('.pdf'))return 'PDF report'; if(path.endsWith('.docx'))return 'Editable Word report';
+      if(path.endsWith('.html'))return 'Interactive HTML'; if(path.endsWith('.gif'))return 'Animation';
+      if(path.endsWith('.zip'))return 'Hand-in package';
+      if(path.endsWith('.mp4'))return 'Video'; if(/\.(png|svg|jpg|jpeg)$/.test(path))return 'Figure';
+      if(path.endsWith('.csv'))return 'CSV data'; if(path.endsWith('.npz'))return 'Numerical archive';
+      if(path.endsWith('.json'))return 'Saved results'; return 'Supporting file';
+    }
+    function outputLinks(output) {
+      const links=make('span','file-links'); const url=safeURL(output.url);
+      if(!url) { links.append(make('span','','Available in the project folder')); return links; }
+      const open=make('a','','Open'); open.href=url; open.target='_blank'; open.rel='noopener'; open.setAttribute('aria-label','Open '+output.label);
+      const download=make('a','','Download'); download.href=url; download.download=''; download.setAttribute('aria-label','Download '+output.label);
+      links.append(open,download); return links;
+    }
+    function renderOutputs(tasks,status) {
+      const candidates=[...(Array.isArray(status.deliverables)?status.deliverables:[]),...tasks.flatMap(task=>(task.outputs || []).map(output=>({...output,task_id:task.id})))];
+      const seen=new Set(); const outputs=[];
+      for(const output of candidates) {
+        const key=output.url || output.path || output.label;
+        if(!key || seen.has(key) || output.exists===false)continue;
+        seen.add(key); outputs.push({...output,label:output.label || String(output.path || '').split('/').pop() || 'Project file'});
+      }
+      const main=outputs.filter(output=>['PDF report','Editable Word report','Interactive HTML','Hand-in package'].includes(outputKind(output)));
+      const other=outputs.filter(output=>!main.includes(output));
+      const container=$('main-outputs'); container.replaceChildren();
+      if(!main.length)container.append(make('p','panel empty','Reports and interactive views will appear here after generation. Existing saved studies can be reused.'));
+      for(const output of main) {
+        const card=make('article','panel output'); card.append(make('p','output-type',outputKind(output)),make('h3','output-title',output.label));
+        const links=outputLinks(output); links.classList.add('output-links'); card.append(links); container.append(card);
+      }
+      $('other-outputs').hidden=!other.length;
+      const list=$('other-files'); list.replaceChildren();
+      for(const output of other) { const item=make('li'); item.append(make('span','file-label',output.label),outputLinks(output)); list.append(item); }
+    }
+    function normalizeGroup(task) {const key=String(task.kind || 'data').toLowerCase(); return groupAliases[key] || (groupOrder.includes(key)?key:'data');}
+    function renderTasks(tasks) {
+      const selector=$('task-select'); const selected=selector.value;
+      selector.replaceChildren(new Option('Select a step',''));
+      const groups=new Map(groupOrder.map(key=>[key,[]]));
+      tasks.forEach((task,index)=>{groups.get(normalizeGroup(task)).push({...task,number:index+1});});
+      const workflow=$('workflow');
+      const openStates=new Map([...workflow.querySelectorAll('details[data-group]')].map(el=>[el.dataset.group,el.open]));
+      workflow.replaceChildren();
+      let displayNumber=0;
+      for(const [key,items] of groups) {
+        if(!items.length)continue;
+        const optionGroup=make('optgroup'); optionGroup.label=groupNames[key].replace(/^\d\. /,'');
+        const group=make('details','workflow-group'); group.dataset.group=key; group.open=openStates.has(key)?openStates.get(key):true;
+        group.append(make('summary','',groupNames[key]));
+        for(const task of items) {
+          optionGroup.append(new Option(task.label || task.id,task.id));
+          const row=make('div','task'); row.append(make('span','task-number',String(++displayNumber).padStart(2,'0')));
+          const text=make('div'); text.append(make('h3','',task.label || task.id));
+          if(task.description)text.append(make('p','task-description',task.description)); row.append(text);
+          const state=String(task.state || task.status || 'missing').toLowerCase();
+          row.append(make('span','badge '+(['ready','missing','stale','running','failed'].includes(state)?state:(state==='completed'||state==='complete'?'ready':'')),statusLabels[state] || state));
+          const button=make('button','button','Generate'); button.type='button'; button.dataset.runTask=task.id;
+          button.setAttribute('aria-label','Generate '+(task.label || task.id)); button.addEventListener('click',()=>run(task.id)); row.append(button); group.append(row);
+        }
+        selector.append(optionGroup); workflow.append(group);
+      }
+      if([...selector.options].some(option=>option.value===selected))selector.value=selected;
+      if(!tasks.length)workflow.append(make('p','empty','No build steps were returned by the local server.'));
+    }
+    function logLine(item) {
+      if(typeof item==='string')return item;
+      if(!item || typeof item!=='object')return '';
+      if(item.line!==undefined)return String(item.line);
+      const message=item.message || '';
+      return (item.label && !message.includes(item.label) ? item.label+': ' : '')+message;
+    }
+    function renderJob(job, explicitRunning=false) {
+      latestJob=job || null; busy=explicitRunning || runningJob(job);
+      if(!job) {
+        $('job-status').textContent='Ready to build'; $('job-message').textContent='Generate all deliverables, or choose one step. Saved results will be reused by default.';
+        $('job-progress').hidden=true; $('job-log').textContent='No build has started.'; return;
+      }
+      const state=String(job.state || job.status || (busy?'running':'')).toLowerCase();
+      const failed=['failed','error'].includes(state); const complete=['complete','completed','succeeded','success','done'].includes(state);
+      $('job-status').textContent=busy?'Build in progress':failed?'Build stopped':complete?'Build complete':'Ready to build';
+      const active=job.current_label || job.label || job.current_task;
+      $('job-message').textContent=job.message || (busy ? (active ? 'Current step: '+active : 'Preparing the requested deliverables…') : failed ? 'Review the error below. Completed files remain available.' : complete ? 'The requested files are ready to review below.' : 'Choose a step to generate its deliverables.');
+      const progress=$('job-progress'); progress.hidden=!busy && !complete;
+      let value=typeof job.progress==='number'?job.progress:null;
+      if(job.progress && typeof job.progress==='object' && job.progress.total>0)value=100*job.progress.completed/job.progress.total;
+      if(value===null && job.total_steps>0)value=100*(job.completed_steps || 0)/job.total_steps;
+      if(complete)progress.value=100; else if(value!==null)progress.value=Math.max(0,Math.min(100,value)); else progress.removeAttribute('value');
+      const lines=Array.isArray(job.log)?job.log.map(logLine).filter(Boolean):typeof job.log==='string'?job.log.split('\n'):Array.isArray(job.events)?job.events.map(logLine).filter(Boolean):[];
+      const log=$('job-log'); const atEnd=log.scrollHeight-log.scrollTop-log.clientHeight<45;
+      const text=lines.length?lines.join('\n'):(busy?'Preparing build…':'No build messages.');
+      if(log.textContent!==text){log.textContent=text;if(atEnd)log.scrollTop=log.scrollHeight;}
+      if(job.error) {showError(typeof job.error==='string'?job.error:JSON.stringify(job.error));$('log-details').open=true;}
+    }
+    async function refresh() {
+      if(fileMode || fetching)return;
+      fetching=true; updateControls();
+      try {
+        const status=await api('/api/status');
+        let job=status.job || null;
+        if(status.running || runningJob(job)) {const result=await api('/api/job');job=result.job || result;}
+        connected=true; clearError(); lastStatus=status;
+        renderJob(job,!!status.running);
+        const tasks=Array.isArray(status.tasks)?status.tasks:[]; renderTasks(tasks); renderOutputs(tasks,status);
+        setServer(busy?'Local builder · Running':'Local builder · Connected',busy?'busy':'ready');
+      } catch(error) {
+        connected=false; busy=false; setServer('Local builder unavailable','error');
+        $('job-status').textContent='Connection unavailable'; $('job-message').textContent='Start the project with python start.py and reopen its local address.';
+        $('job-progress').hidden=true; showError(errorText(error));
+      } finally {
+        fetching=false; updateControls(); schedulePoll();
+      }
+    }
+    function schedulePoll() {clearTimeout(pollTimer);if(!fileMode)pollTimer=setTimeout(refresh,busy?1200:8000);}
+    async function run(task) {
+      if(!canRun() || !task)return;
+      pendingRequest=true; clearError(); updateControls();
+      $('job-status').textContent='Starting build'; $('job-message').textContent='The builder is checking the required inputs…';
+      try {
+        const response=await api('/api/run',{method:'POST',headers:{'Content-Type':'application/json','X-Project-Token':lastStatus.csrf_token},body:JSON.stringify({task,fresh:$('fresh').checked})});
+        renderJob(response.job || response, true); busy=true; setServer('Local builder · Running','busy');
+      } catch(error) { showError(errorText(error)); }
+      finally {pendingRequest=false;updateControls();await refresh();}
+    }
+    $('generate-all').addEventListener('click',()=>run('all'));
+    $('generate-package').addEventListener('click',()=>run('package'));
+    $('generate-selected').addEventListener('click',()=>run($('task-select').value));
+    $('task-select').addEventListener('change',updateControls);
+    $('refresh').addEventListener('click',refresh);
+    document.addEventListener('visibilitychange',()=>{if(!document.hidden)refresh();});
+    if(fileMode) {
+      $('file-notice').hidden=false; setServer('Local server required');
+      $('job-status').textContent='Open through the local builder'; $('job-message').textContent='Run python start.py in this folder, then use the local address it displays.';
+      $('main-outputs').replaceChildren(make('p','panel empty','Launch the local builder to check and generate the deliverables.'));
+    } else {refresh();}
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+# Python's CSV writer uses standard CRLF records; preserve their hashed bytes.
+*.csv whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
