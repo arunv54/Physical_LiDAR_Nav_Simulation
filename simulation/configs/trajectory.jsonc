@@ -1,0 +1,39 @@
+// A known-map geometric reference and a separate LiDAR-controlled execution.
+// Unexpected objects are withheld from A* and exist only in the sensing world.
+{
+  "base_config": "sensor.jsonc",
+  "sensor_overrides": {
+    "n_channels": 8, "measurements_per_cycle": 360, "n_beam_samples": 1,
+    "vfov_lower_deg": -20.0, "vfov_upper_deg": 10.0
+  },
+  "mount_height_m": 0.6,
+  "lidar_enabled": true,
+  "robot": {
+    "start": [0.0, 0.0], "goal": [18.0, 0.0], "start_heading_deg": 0.0,
+    "goal_tolerance_m": 0.35, "radius_m": 0.35, "height_m": 1.0,
+    "v_max": 1.2, "omega_max_deg_s": 90.0, "dt": 0.2, "max_steps": 320
+  },
+  "planner": {
+    "resolution_m": 0.25, "extent": [-2.0, 21.0, -6.0, 7.0],
+    "safety_margin_m": 0.25, "corner_buffer_m": 0.3,
+    "reference_speed_mps": 0.8, "resample_spacing_m": 0.15
+  },
+  "controller": {
+    "n_headings": 72, "route_lookahead_m": 1.8, "avoidance_lookahead_m": 5.5,
+    "lookahead_m": 6.0, "safety_margin_m": 0.25,
+    "d_stop_m": 0.15, "d_slow_m": 2.2,
+    "w_tracking": 1.0, "w_turn": 0.25, "w_free": 1.5,
+    "k_omega": 2.5, "z_ground_m": 0.12
+  },
+  "world": {
+    "known_objects": [
+      {"type": "box", "label": "known_wall", "center": [6.0, -0.8, 0.6],
+       "size": [2.0, 3.8, 1.2], "yaw_deg": 0, "material": "concrete"}
+    ],
+    "unexpected_objects": [
+      {"type": "cylinder", "label": "unexpected_barrel", "base": [11.0, 1.1, 0.0],
+       "radius": 0.8, "height": 1.2, "material": "concrete"}
+    ]
+  },
+  "scenarios": [{"name": "baseline", "sensor": {}}]
+}
