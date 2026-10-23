@@ -1,0 +1,483 @@
+{
+  "format_version": 2,
+  "video": "environment_conditions.mp4",
+  "mode": "environment",
+  "frame_size": [
+    1600,
+    900
+  ],
+  "encoded_fps": 15,
+  "simulation_snapshot_hz": 5.0,
+  "rendered_snapshot_count": 105,
+  "duration_s": 21.0,
+  "common_time_axis_s": [
+    0,
+    18.0
+  ],
+  "end_hold_s": 3.0,
+  "chronology": "scan k at controls_t[k] = states_t[k]; terminal state has no scan; ended runs freeze without new measurements",
+  "map_semantics": "first measured endpoint per 0.12 m voxel; observed XY cells are measured-endpoint cells, not free space or true map accuracy",
+  "display": "small endpoint markers; common retained map-voxel fraction 0.438901, at most 12000 displayed voxels per panel, preserving case density ratios; latest scans are visually cropped to x[-2,21], y[-6,7], z[-0.2,3.2] m; all raw returns retained in metrics; static translucent meshes are truth context",
+  "limitations": [
+    "exact simulator poses, static objects, ideal snapshot scans; no SLAM",
+    "illustrative attenuation coefficients; no calibrated real-weather validation",
+    "rain/fog attenuation only; no weather particles/backscatter"
+  ],
+  "comparison_design": null,
+  "source_files": [
+    {
+      "path": "data/video_inputs/all/summary.json",
+      "sha256": "446a00d01d7ee03e60cf77c3c3063c48fd787711f11699d3203a29d004eb8649"
+    },
+    {
+      "path": "data/video_inputs/all/runs/baseline/seed_1/trajectory.json",
+      "sha256": "ce1b652248da284b7fdd8cdfb0d37b09cf4eae22ef073911a35567a98474c4ef"
+    },
+    {
+      "path": "data/video_inputs/all/runs/baseline/seed_1/trajectory.npz",
+      "sha256": "4f6f44b6d601b39203637423d33897a132af3444e5f14e73df10d3c96f03a01e"
+    },
+    {
+      "path": "data/video_inputs/all/runs/baseline/seed_1/mapping.json",
+      "sha256": "cac14f315299983c8ad14da02af887cf91aad6a555cf23630748da7b68db79e2"
+    },
+    {
+      "path": "data/video_inputs/all/runs/baseline/seed_1/mapping.npz",
+      "sha256": "83b07c5955916cfc27813a07ff9b851da6cc84294af5750835f89577bef1ce88"
+    },
+    {
+      "path": "data/video_inputs/all/runs/baseline/seed_1/diagnostics.csv",
+      "sha256": "eef46e17ff2c0784ad182050f4939bf20be3b8b84d94d1485f019188986caff4"
+    },
+    {
+      "path": "data/video_inputs/all/runs/fog/seed_1/trajectory.json",
+      "sha256": "1b1dd54dce685d3856109232c93be778db3bc8daf7fea40dece09bbeb8ef81dd"
+    },
+    {
+      "path": "data/video_inputs/all/runs/fog/seed_1/trajectory.npz",
+      "sha256": "c3f35f92dbefdf14b546b9027c19c0bb5c3be385599af551df5867c82509cf23"
+    },
+    {
+      "path": "data/video_inputs/all/runs/fog/seed_1/mapping.json",
+      "sha256": "48599cf8ce7a9e2cd85b72c13118c5467dfb774fc3e30d8a1c1840505ecf00c1"
+    },
+    {
+      "path": "data/video_inputs/all/runs/fog/seed_1/mapping.npz",
+      "sha256": "9d05c3519cc775575835c51e0ff57cf4a378b2c8c193c1af467f9d147ddcc596"
+    },
+    {
+      "path": "data/video_inputs/all/runs/fog/seed_1/diagnostics.csv",
+      "sha256": "5687220d109b86e762f7918b2e6f89db14dc60d72a99da84f5d5055d1f396abf"
+    },
+    {
+      "path": "data/video_inputs/all/runs/rain/seed_1/trajectory.json",
+      "sha256": "9a8f1f26e819ed72fb0ac3744c1e87ce2204981755bcd086c8f0e835f44718bf"
+    },
+    {
+      "path": "data/video_inputs/all/runs/rain/seed_1/trajectory.npz",
+      "sha256": "25913dacb62381475ef0bd14b49b10098b847c65132a71a8a196fb0f27fbe643"
+    },
+    {
+      "path": "data/video_inputs/all/runs/rain/seed_1/mapping.json",
+      "sha256": "417d2a6e90e7f397b247b0e964c8765bb8fb3d33b789fc324a7b69c879b58919"
+    },
+    {
+      "path": "data/video_inputs/all/runs/rain/seed_1/mapping.npz",
+      "sha256": "a41585aeb54550ffeaee10ff14efbcbfbca323e7443f6746ab2264474aadfb65"
+    },
+    {
+      "path": "data/video_inputs/all/runs/rain/seed_1/diagnostics.csv",
+      "sha256": "d4e0e0da6c252fcdab1b2acbdf75c809a93f24b5d19be02fbd5fd4342d457965"
+    }
+  ],
+  "cases": [
+    {
+      "id": "baseline",
+      "seed": 1,
+      "status": "goal",
+      "end_time_s": 18.0,
+      "last_scan_time_s": 17.8,
+      "sensor": {
+        "n_channels": 8,
+        "vfov_lower_deg": -20.0,
+        "vfov_upper_deg": 10.0,
+        "measurements_per_cycle": 360,
+        "hfov_start_deg": -180.0,
+        "hfov_end_deg": 180.0,
+        "rotations_per_s": 10.0,
+        "min_range_m": 0.5,
+        "max_range_m": 200.0,
+        "peak_power_w": 75.0,
+        "beam_divergence_mrad": 2.0,
+        "n_beam_samples": 1,
+        "pulse_fwhm_ns": 5.0,
+        "pulse_rise_ns": 1.0,
+        "aperture_diam_m": 0.025,
+        "optical_efficiency": 0.5,
+        "noise_rms_w": 4e-09,
+        "snr_threshold": 10.0,
+        "saturation_power_w": 5e-05,
+        "range_floor_sigma_m": 0.01,
+        "noise_enabled": true,
+        "air_extinction_per_m": 0.0002,
+        "rain_mm_per_h": 0.0,
+        "rain_a": 0.01,
+        "rain_b": 0.6,
+        "return_mode": "strongest"
+      },
+      "sensor_mount": {
+        "offset_xy_m": [
+          0.0,
+          0.0
+        ],
+        "roll_deg": 0.0,
+        "pitch_deg": 0.0,
+        "yaw_deg": 0.0
+      },
+      "mount_height_m": 0.6,
+      "recording_kind": "runs",
+      "aggregate": {
+        "runs": 3,
+        "goals": 3,
+        "collisions": 0,
+        "timeouts": 0,
+        "mean_elapsed_s": 18.066666666666666,
+        "mean_path_length_m": 19.702310840312034,
+        "worst_surface_gap_m": 0.32963455970450084,
+        "mean_observed_fraction": 0.7367224080267558,
+        "mean_spatial_route_rmse_m": 0.5974670095390099,
+        "mean_returns_per_control_step": 2198.387545787546
+      },
+      "seed_map": {
+        "format_version": 1,
+        "map_type": "cumulative measured-surface endpoints",
+        "coordinate_frame": "world",
+        "pose_assumption": "World points use the simulator's known exact pose; no SLAM or pose estimation.",
+        "voxel_size_m": 0.12,
+        "resolution_m": 0.2,
+        "roi_extent_m": [
+          -2.0,
+          21.0,
+          -6.0,
+          7.0
+        ],
+        "extent_m": [
+          -2.0,
+          21.0,
+          -6.0,
+          7.0
+        ],
+        "grid_shape": [
+          65,
+          115
+        ],
+        "ground_threshold_m": 0.12,
+        "z_limits_m": null,
+        "steps": 90,
+        "raw_return_count": 197814,
+        "finite_return_count": 197814,
+        "retained_measurement_count": 179435,
+        "map_point_count": 27341,
+        "nonfinite_intensity_count": 0,
+        "observed_cell_count": 5513,
+        "roi_cell_count": 7475,
+        "observed_cell_fraction": 0.7375250836120402,
+        "observed_cell_area_m2": 220.52000000000004,
+        "map_z_range_m": [
+          -0.012972840226279647,
+          2.570525078416569
+        ],
+        "semantics": {
+          "voxel": "Stable first observed measured representative; later observations never change its position or intensity.",
+          "step": "Scan/control index k; no extra final-state scan. Negative one is empty; indices beyond the last scan hold the final map.",
+          "raster": {
+            "0": "Unknown: no measured endpoint in this cell.",
+            "1": "Observed low/ground-like endpoint at z<=threshold.",
+            "2": "Observed elevated-surface endpoint at z>threshold."
+          },
+          "precedence": "Elevated-surface evidence takes precedence only from its own first observed step onward; later ground observations do not erase it.",
+          "limits": "No rays mark free or traversable space. No unseen interiors or true obstacle coverage are inferred. All measured heights, including above robot body height, are retained unless an explicit z crop is requested.",
+          "area": "Observed endpoint cells divided by regular raster ROI cells; this is not traversable area or true surface coverage. For non-grid-aligned crops, the enclosing regular raster extent is recorded separately."
+        }
+      },
+      "study_target": {
+        "type": "box",
+        "label": "study_target",
+        "center": [
+          11.0,
+          1.1,
+          0.6
+        ],
+        "size": [
+          0.8,
+          1.6,
+          1.2
+        ],
+        "yaw_deg": 0.0,
+        "material": {
+          "rho_d": 0.3,
+          "rho_s": 0.0
+        }
+      }
+    },
+    {
+      "id": "fog",
+      "seed": 1,
+      "status": "goal",
+      "end_time_s": 17.8,
+      "last_scan_time_s": 17.6,
+      "sensor": {
+        "n_channels": 8,
+        "vfov_lower_deg": -20.0,
+        "vfov_upper_deg": 10.0,
+        "measurements_per_cycle": 360,
+        "hfov_start_deg": -180.0,
+        "hfov_end_deg": 180.0,
+        "rotations_per_s": 10.0,
+        "min_range_m": 0.5,
+        "max_range_m": 200.0,
+        "peak_power_w": 75.0,
+        "beam_divergence_mrad": 2.0,
+        "n_beam_samples": 1,
+        "pulse_fwhm_ns": 5.0,
+        "pulse_rise_ns": 1.0,
+        "aperture_diam_m": 0.025,
+        "optical_efficiency": 0.5,
+        "noise_rms_w": 4e-09,
+        "snr_threshold": 10.0,
+        "saturation_power_w": 5e-05,
+        "range_floor_sigma_m": 0.01,
+        "noise_enabled": true,
+        "air_extinction_per_m": 0.6,
+        "rain_mm_per_h": 0.0,
+        "rain_a": 0.01,
+        "rain_b": 0.6,
+        "return_mode": "strongest"
+      },
+      "sensor_mount": {
+        "offset_xy_m": [
+          0.0,
+          0.0
+        ],
+        "roll_deg": 0.0,
+        "pitch_deg": 0.0,
+        "yaw_deg": 0.0
+      },
+      "mount_height_m": 0.6,
+      "recording_kind": "runs",
+      "aggregate": {
+        "runs": 3,
+        "goals": 3,
+        "collisions": 0,
+        "timeouts": 0,
+        "mean_elapsed_s": 17.933333333333334,
+        "mean_path_length_m": 19.78398706269225,
+        "worst_surface_gap_m": 0.3448307242673919,
+        "mean_observed_fraction": 0.47103678929765885,
+        "mean_spatial_route_rmse_m": 0.6005119975851946,
+        "mean_returns_per_control_step": 1741.9640865584686
+      },
+      "seed_map": {
+        "format_version": 1,
+        "map_type": "cumulative measured-surface endpoints",
+        "coordinate_frame": "world",
+        "pose_assumption": "World points use the simulator's known exact pose; no SLAM or pose estimation.",
+        "voxel_size_m": 0.12,
+        "resolution_m": 0.2,
+        "roi_extent_m": [
+          -2.0,
+          21.0,
+          -6.0,
+          7.0
+        ],
+        "extent_m": [
+          -2.0,
+          21.0,
+          -6.0,
+          7.0
+        ],
+        "grid_shape": [
+          65,
+          115
+        ],
+        "ground_threshold_m": 0.12,
+        "z_limits_m": null,
+        "steps": 89,
+        "raw_return_count": 154976,
+        "finite_return_count": 154976,
+        "retained_measurement_count": 154613,
+        "map_point_count": 20401,
+        "nonfinite_intensity_count": 0,
+        "observed_cell_count": 3518,
+        "roi_cell_count": 7475,
+        "observed_cell_fraction": 0.47063545150501673,
+        "observed_cell_area_m2": 140.72000000000003,
+        "map_z_range_m": [
+          -0.013289241005094321,
+          1.6839412401218894
+        ],
+        "semantics": {
+          "voxel": "Stable first observed measured representative; later observations never change its position or intensity.",
+          "step": "Scan/control index k; no extra final-state scan. Negative one is empty; indices beyond the last scan hold the final map.",
+          "raster": {
+            "0": "Unknown: no measured endpoint in this cell.",
+            "1": "Observed low/ground-like endpoint at z<=threshold.",
+            "2": "Observed elevated-surface endpoint at z>threshold."
+          },
+          "precedence": "Elevated-surface evidence takes precedence only from its own first observed step onward; later ground observations do not erase it.",
+          "limits": "No rays mark free or traversable space. No unseen interiors or true obstacle coverage are inferred. All measured heights, including above robot body height, are retained unless an explicit z crop is requested.",
+          "area": "Observed endpoint cells divided by regular raster ROI cells; this is not traversable area or true surface coverage. For non-grid-aligned crops, the enclosing regular raster extent is recorded separately."
+        }
+      },
+      "study_target": {
+        "type": "box",
+        "label": "study_target",
+        "center": [
+          11.0,
+          1.1,
+          0.6
+        ],
+        "size": [
+          0.8,
+          1.6,
+          1.2
+        ],
+        "yaw_deg": 0.0,
+        "material": {
+          "rho_d": 0.3,
+          "rho_s": 0.0
+        }
+      }
+    },
+    {
+      "id": "rain",
+      "seed": 1,
+      "status": "goal",
+      "end_time_s": 18.0,
+      "last_scan_time_s": 17.8,
+      "sensor": {
+        "n_channels": 8,
+        "vfov_lower_deg": -20.0,
+        "vfov_upper_deg": 10.0,
+        "measurements_per_cycle": 360,
+        "hfov_start_deg": -180.0,
+        "hfov_end_deg": 180.0,
+        "rotations_per_s": 10.0,
+        "min_range_m": 0.5,
+        "max_range_m": 200.0,
+        "peak_power_w": 75.0,
+        "beam_divergence_mrad": 2.0,
+        "n_beam_samples": 1,
+        "pulse_fwhm_ns": 5.0,
+        "pulse_rise_ns": 1.0,
+        "aperture_diam_m": 0.025,
+        "optical_efficiency": 0.5,
+        "noise_rms_w": 4e-09,
+        "snr_threshold": 10.0,
+        "saturation_power_w": 5e-05,
+        "range_floor_sigma_m": 0.01,
+        "noise_enabled": true,
+        "air_extinction_per_m": 0.0002,
+        "rain_mm_per_h": 50.0,
+        "rain_a": 0.01,
+        "rain_b": 0.6,
+        "return_mode": "strongest"
+      },
+      "sensor_mount": {
+        "offset_xy_m": [
+          0.0,
+          0.0
+        ],
+        "roll_deg": 0.0,
+        "pitch_deg": 0.0,
+        "yaw_deg": 0.0
+      },
+      "mount_height_m": 0.6,
+      "recording_kind": "runs",
+      "aggregate": {
+        "runs": 3,
+        "goals": 3,
+        "collisions": 0,
+        "timeouts": 0,
+        "mean_elapsed_s": 18.066666666666666,
+        "mean_path_length_m": 19.702306957871574,
+        "worst_surface_gap_m": 0.32963045593583995,
+        "mean_observed_fraction": 0.7033221850613156,
+        "mean_spatial_route_rmse_m": 0.5974672958993136,
+        "mean_returns_per_control_step": 2011.2617419617418
+      },
+      "seed_map": {
+        "format_version": 1,
+        "map_type": "cumulative measured-surface endpoints",
+        "coordinate_frame": "world",
+        "pose_assumption": "World points use the simulator's known exact pose; no SLAM or pose estimation.",
+        "voxel_size_m": 0.12,
+        "resolution_m": 0.2,
+        "roi_extent_m": [
+          -2.0,
+          21.0,
+          -6.0,
+          7.0
+        ],
+        "extent_m": [
+          -2.0,
+          21.0,
+          -6.0,
+          7.0
+        ],
+        "grid_shape": [
+          65,
+          115
+        ],
+        "ground_threshold_m": 0.12,
+        "z_limits_m": null,
+        "steps": 90,
+        "raw_return_count": 180969,
+        "finite_return_count": 180969,
+        "retained_measurement_count": 178060,
+        "map_point_count": 26854,
+        "nonfinite_intensity_count": 0,
+        "observed_cell_count": 5265,
+        "roi_cell_count": 7475,
+        "observed_cell_fraction": 0.7043478260869566,
+        "observed_cell_area_m2": 210.60000000000005,
+        "map_z_range_m": [
+          -0.012992539604334996,
+          2.5699788994088917
+        ],
+        "semantics": {
+          "voxel": "Stable first observed measured representative; later observations never change its position or intensity.",
+          "step": "Scan/control index k; no extra final-state scan. Negative one is empty; indices beyond the last scan hold the final map.",
+          "raster": {
+            "0": "Unknown: no measured endpoint in this cell.",
+            "1": "Observed low/ground-like endpoint at z<=threshold.",
+            "2": "Observed elevated-surface endpoint at z>threshold."
+          },
+          "precedence": "Elevated-surface evidence takes precedence only from its own first observed step onward; later ground observations do not erase it.",
+          "limits": "No rays mark free or traversable space. No unseen interiors or true obstacle coverage are inferred. All measured heights, including above robot body height, are retained unless an explicit z crop is requested.",
+          "area": "Observed endpoint cells divided by regular raster ROI cells; this is not traversable area or true surface coverage. For non-grid-aligned crops, the enclosing regular raster extent is recorded separately."
+        }
+      },
+      "study_target": {
+        "type": "box",
+        "label": "study_target",
+        "center": [
+          11.0,
+          1.1,
+          0.6
+        ],
+        "size": [
+          0.8,
+          1.6,
+          1.2
+        ],
+        "yaw_deg": 0.0,
+        "material": {
+          "rho_d": 0.3,
+          "rho_s": 0.0
+        }
+      }
+    }
+  ],
+  "reproduce": "python tools/generate_environment_video.py"
+}
